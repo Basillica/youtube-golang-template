@@ -1,0 +1,108 @@
+basePath: /api/v1
+definitions:
+  errors.ErrorMessage:
+    properties:
+      error:
+        type: string
+      message:
+        type: string
+      statusCode:
+        type: integer
+    type: object
+  responses.Account:
+    properties:
+      active:
+        type: boolean
+      address:
+        type: string
+      createdAt:
+        description: google.protobuf.Timestamp
+        type: string
+      name:
+        type: string
+    type: object
+host: localhost:8080
+info:
+  contact:
+    email: support@swagger.io
+    name: Jenoptik Support Team
+    url: http://www.swagger.io/support
+  description: The api documentation of the apis of our template.
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: http://swagger.io/terms/
+  title: Go-Template api documentation
+  version: 0.1.0
+paths:
+  /account/:id:
+    get:
+      consumes:
+      - application/json
+      description: Get account info using id, user ID and token
+      parameters:
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: User ID
+        in: path
+        name: user_oid
+        required: true
+        type: string
+      - description: Access Token
+        in: path
+        name: access_token
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/responses.Account'
+      summary: Endpoint to get account info
+      tags:
+      - Account
+  /create:
+    post:
+      consumes:
+      - application/json
+      description: create a account with the token and user id
+      parameters:
+      - description: Account Request
+        in: body
+        name: req
+        required: true
+        schema:
+          $ref: '#/definitions/responses.Account'
+      - description: User ID
+        in: path
+        name: user_oid
+        required: true
+        type: string
+      - description: Access Token
+        in: path
+        name: access_token
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/responses.Account'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/errors.ErrorMessage'
+      summary: Endpoint to create a account
+      tags:
+      - Account
+securityDefinitions:
+  BasicAuth:
+    type: basic
+swagger: "2.0"

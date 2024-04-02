@@ -1,0 +1,11 @@
+syntax = "proto3";
+package requests;
+
+option go_package = "types/requests";
+
+message User {
+    string firstname = 1;
+    string lastname = 2;
+    string email = 3;
+    bool active = 4;
+}

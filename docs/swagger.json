@@ -1,0 +1,161 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "The api documentation of the apis of our template.",
+        "title": "Go-Template api documentation",
+        "termsOfService": "http://swagger.io/terms/",
+        "contact": {
+            "name": "Jenoptik Support Team",
+            "url": "http://www.swagger.io/support",
+            "email": "support@swagger.io"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "0.1.0"
+    },
+    "host": "localhost:8080",
+    "basePath": "/api/v1",
+    "paths": {
+        "/account/:id": {
+            "get": {
+                "description": "Get account info using id, user ID and token",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Account"
+                ],
+                "summary": "Endpoint to get account info",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "User ID",
+                        "name": "user_oid",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Access Token",
+                        "name": "access_token",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/responses.Account"
+                        }
+                    }
+                }
+            }
+        },
+        "/create": {
+            "post": {
+                "description": "create a account with the token and user id",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Account"
+                ],
+                "summary": "Endpoint to create a account",
+                "parameters": [
+                    {
+                        "description": "Account Request",
+                        "name": "req",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/responses.Account"
+                        }
+                    },
+                    {
+                        "type": "string",
+                        "description": "User ID",
+                        "name": "user_oid",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Access Token",
+                        "name": "access_token",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/responses.Account"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/errors.ErrorMessage"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "errors.ErrorMessage": {
+            "type": "object",
+            "properties": {
+                "error": {
+                    "type": "string"
+                },
+                "message": {
+                    "type": "string"
+                },
+                "statusCode": {
+                    "type": "integer"
+                }
+            }
+        },
+        "responses.Account": {
+            "type": "object",
+            "properties": {
+                "active": {
+                    "type": "boolean"
+                },
+                "address": {
+                    "type": "string"
+                },
+                "createdAt": {
+                    "description": "google.protobuf.Timestamp",
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                }
+            }
+        }
+    },
+    "securityDefinitions": {
+        "BasicAuth": {
+            "type": "basic"
+        }
+    }
+}

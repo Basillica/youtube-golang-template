@@ -1,0 +1,10 @@
+@token=eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6Ii1LSTNROW5OUjdiUm9meG1lWm9YcWJIWkdldyIsImtpZCI6Ii1LSTNROW5OUjdiUm9meG1lWm9YcWJIWkdldyJ9
+
+GET http://localhost:8080/v1/users/users HTTP/1.1
+Content-type: application/json
+Authorization: Bearer {{token}}
+
+###
+GET http://localhost:8080/v1/misc/health HTTP/1.1
+Content-type: application/json
+Authorization: Bearer {{token}} 
